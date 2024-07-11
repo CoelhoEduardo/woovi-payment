@@ -1,95 +1,54 @@
+"use client";
+
+import { Card, Header } from "./components";
+import { Box, Container } from "@mui/material";
+import { CardBody } from "./components/card";
 import Image from "next/image";
-import styles from "./page.module.css";
 
 export default function Home() {
+  const totalValue = 30500;
+  const totalInstal = totalValue + (1 / 100) * 10000;
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <Container maxWidth="sm">
+      <Box
+        m={2}
+        p={2}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Header subtitle="João, como você quer pagar ?" />
+        <Card
+          chipLabel="Pix"
+          cardBody={
+            <CardBody
+              installments={1}
+              installmentsValue={totalValue}
+              totalValue={30500}
+              getIndex={1}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          }
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <Card
+          marginTop={20}
+          chipLabel="Pix Parcelado"
+          cardBody={Array.from({ length: 6 }).map((_, index) => (
+            <CardBody
+              key={index}
+              getIndex={index + 2}
+              installments={index + 2}
+              installmentsValue={totalInstal / (index + 2)}
+              totalValue={totalInstal}
+              hasLastIndex={index !== 6 - 1}
+            />
+          ))}
+        />
+        <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
+          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />
+          {" "}Pagamento 100% seguro via: {" "}
+          <Image alt="logo" width={38} height={12} src="/mini_logo.svg" />
+        </Box>
+      </Box>
+    </Container>
   );
 }
