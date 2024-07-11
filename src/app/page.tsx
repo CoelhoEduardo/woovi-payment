@@ -10,14 +10,8 @@ export default function Home() {
   const totalInstal = totalValue + (1 / 100) * 10000;
   return (
     <Container maxWidth="sm">
-      <Box
-        m={2}
-        p={2}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <Header subtitle="João, como você quer pagar ?" />
+      <Header subtitle="João, como você quer pagar ?" />
+      <Box p={2} display="flex" flexDirection="column" alignItems="center">
         <Card
           chipLabel="Pix"
           cardBody={
@@ -44,8 +38,8 @@ export default function Home() {
           ))}
         />
         <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
-          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />
-          {" "}Pagamento 100% seguro via: {" "}
+          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}
+          Pagamento 100% seguro via:{" "}
           <Image alt="logo" width={38} height={12} src="/mini_logo.svg" />
         </Box>
       </Box>
