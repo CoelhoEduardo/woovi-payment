@@ -30,7 +30,7 @@ export default function PixPayment() {
 
   return (
     <Container maxWidth="sm">
-      <Header subtitle="João, como você quer pagar ?" />
+      <Header showingButton href="/" subtitle="João, pague a entrada de R$ 15.300,00 pelo Pix" />
       <Box p={2} display="flex" flexDirection="column" alignItems="center">
         <Box
           border={2}
@@ -51,23 +51,24 @@ export default function PixPayment() {
         </Box>
         <ButtonApp
           label="Clique para copiar QR CODE"
+          href="/payment-credit"
           icon={<FileCopy sx={{ width: "18px" }} />}
         />
         <Box mt={2}>
-          <Typography
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#B2B2B2", fontSize: "10px" }}
           >
             Prazo de pagamento:
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
           >
             {todayDate}
-          </Typography>
+          </Box>
         </Box>
 
         <Box
@@ -124,20 +125,20 @@ export default function PixPayment() {
               width: "100%",
             }}
           >
-            <Typography
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px" }}
             >
               1ª entrada no Pix
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
             >
               {valueToPay}
-            </Typography>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -146,20 +147,20 @@ export default function PixPayment() {
               width: "100%",
             }}
           >
-            <Typography
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px" }}
             >
               2ª no cartão
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
             >
               {valueToPay}
-            </Typography>
+            </Box>
           </Box>
         </Box>
 
@@ -172,12 +173,12 @@ export default function PixPayment() {
             width: "100%",
           }}
         >
-          <Typography sx={{ fontSize: "12px", color: "#4D4D4D" }}>
+          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
             CET: 0,5%
-          </Typography>
-          <Typography sx={{ fontSize: "12px", color: "#4D4D4D" }}>
+          </Box>
+          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
             Total: {totalValue}
-          </Typography>
+          </Box>
         </Box>
         <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
         <Box
@@ -188,31 +189,31 @@ export default function PixPayment() {
             width: "100%",
           }}
         >
-          <Typography
+          <Box
             sx={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "bold" }}
           >
             Como funciona?
-          </Typography>
+          </Box>
           <Box>
             <ExpandLessIcon />
           </Box>
         </Box>
         <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
         <Box mt={2} display="flex" flexDirection="column" alignItems="center">
-          <Typography
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#B2B2B2", fontSize: "10px" }}
           >
             Identificador:
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
           >
             {getUuid}
-          </Typography>
+          </Box>
         </Box>
         <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
           <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}

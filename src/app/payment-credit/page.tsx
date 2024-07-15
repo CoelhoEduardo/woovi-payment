@@ -18,7 +18,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 export default function PixPayment() {
-    const todayDate = new Date()
+  const todayDate = new Date()
     .toLocaleString("pt-BR", {
       year: "numeric",
       day: "numeric",
@@ -27,25 +27,25 @@ export default function PixPayment() {
       minute: "2-digit",
     })
     .replace(",", " - ");
-  const value = 30600
-  const totalValue = (value).toLocaleString("pt-br", {
+  const value = 30600;
+  const totalValue = value.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
-  });;
-  const valueToPay = (value/2).toLocaleString("pt-br", {
+  });
+  const valueToPay = (value / 2).toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
   const getUuid = uuidv4();
 
   useEffect(() => {
-    new Date()
+    new Date();
     uuidv4();
-  },[getUuid, todayDate])
+  }, [getUuid, todayDate]);
 
   return (
     <Container maxWidth="sm">
-      <Header subtitle="João, pague o restante em 1x no cartão" />
+      <Header showingButton href="/payment-pix" subtitle="João, pague o restante em 1x no cartão" />
       <Box p={2} display="flex" flexDirection="column" alignItems="center">
         <Box component="form" display="grid">
           <FormControl sx={{ m: 1, minWidth: 320 }}>
@@ -73,10 +73,7 @@ export default function PixPayment() {
               id="demo-simple-select"
               label="Parcelas"
             >
-              <MenuItem value={10}>
-                1x{" "}
-                {valueToPay}
-              </MenuItem>
+              <MenuItem value={10}>1x {valueToPay}</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
@@ -84,20 +81,20 @@ export default function PixPayment() {
         </Box>
         <ButtonApp label="Pagar" />
         <Box mt={2}>
-          <Typography
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#B2B2B2", fontSize: "10px" }}
           >
             Prazo de pagamento:
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
           >
             {todayDate}
-          </Typography>
+          </Box>
         </Box>
 
         <Box
@@ -166,20 +163,20 @@ export default function PixPayment() {
               width: "100%",
             }}
           >
-            <Typography
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px" }}
             >
               1ª entrada no Pix
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
             >
               {valueToPay}
-            </Typography>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -188,20 +185,20 @@ export default function PixPayment() {
               width: "100%",
             }}
           >
-            <Typography
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px" }}
             >
               2ª no cartão
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               fontSize={12}
               mr={1}
               sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
             >
               {valueToPay}
-            </Typography>
+            </Box>
           </Box>
         </Box>
 
@@ -214,13 +211,12 @@ export default function PixPayment() {
             width: "100%",
           }}
         >
-          <Typography sx={{ fontSize: "12px", color: "#4D4D4D" }}>
+          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
             CET: 0,5%
-          </Typography>
-          <Typography sx={{ fontSize: "12px", color: "#4D4D4D" }}>
-            Total:{" "}
-            {totalValue}
-          </Typography>
+          </Box>
+          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
+            Total: {totalValue}
+          </Box>
         </Box>
         <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
         <Box
@@ -231,31 +227,31 @@ export default function PixPayment() {
             width: "100%",
           }}
         >
-          <Typography
+          <Box
             sx={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "bold" }}
           >
             Como funciona?
-          </Typography>
+          </Box>
           <Box>
             <ExpandLessIcon />
           </Box>
         </Box>
         <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
         <Box mt={2} display="flex" flexDirection="column" alignItems="center">
-          <Typography
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#B2B2B2", fontSize: "10px" }}
           >
             Identificador:
-          </Typography>
-          <Typography
+          </Box>
+          <Box
             fontSize={12}
             mr={1}
             sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
           >
             {getUuid}
-          </Typography>
+          </Box>
         </Box>
         <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
           <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}

@@ -1,12 +1,14 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const ButtonApp = ({
   label,
   icon,
+  href
 }: {
   label: string;
   icon?: React.JSX.Element;
+  href?: string;
 }) => {
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
@@ -34,10 +36,10 @@ export const ButtonApp = ({
   });
 
   return (
-    <BootstrapButton variant="contained" disableRipple>
-      <Typography fontSize={12} mr={1}>
+    <BootstrapButton href={href} variant="contained" disableRipple>
+      <Box fontSize={12} mr={1}>
         {label}
-      </Typography>
+      </Box>
       {icon}
     </BootstrapButton>
   );
