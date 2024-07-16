@@ -17,7 +17,8 @@ export const ButtonApp = ({
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
-    fontSize: 18,
+    fontSize: '14px',
+    fontWeight: "400",
     padding: "6px 12px",
     border: "1px solid",
     borderRadius: "8px",
@@ -41,7 +42,7 @@ export const ButtonApp = ({
 
   return (
     <BootstrapButton type={type} onClick={onClick} href={href} variant="contained" disableRipple>
-      <Box fontSize={12} mr={1}>
+      <Box>
         {label}
       </Box>
       {icon}
