@@ -4,11 +4,15 @@ import { styled } from "@mui/material/styles";
 export const ButtonApp = ({
   label,
   icon,
-  href
+  href,
+  onClick,
+  type
 }: {
   label: string;
   icon?: React.JSX.Element;
   href?: string;
+  onClick?: () => void
+  type?: "button" | "submit" | "reset" | undefined
 }) => {
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
@@ -36,7 +40,7 @@ export const ButtonApp = ({
   });
 
   return (
-    <BootstrapButton href={href} variant="contained" disableRipple>
+    <BootstrapButton type={type} onClick={onClick} href={href} variant="contained" disableRipple>
       <Box fontSize={12} mr={1}>
         {label}
       </Box>

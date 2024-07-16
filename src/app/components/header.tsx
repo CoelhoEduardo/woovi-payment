@@ -21,19 +21,22 @@ export const Header = ({
       textAlign="center"
       sx={{ width: "100%", color: "#4D4D4D" }}
     >
-      {showingButton === true ? (
-        <Button href={href}>
-          <ArrowBackIosIcon />
-        </Button>
-      ) : null}
-
-      <Image
-        src="/woovi.svg"
-        alt="Woovi logo"
-        width={180}
-        height={37}
-        priority
-      />
+      <Box sx={{ position: "relative", width: "100%" }}>
+        {showingButton === true ? (
+          <Box sx={{ position: "absolute", bottom: "0px", left: "0px" }}>
+            <Button href={href} sx={{ color: "#133A6F" }}>
+              <ArrowBackIosIcon />
+            </Button>
+          </Box>
+        ) : null}
+        <Image
+          src="/woovi.svg"
+          alt="Woovi logo"
+          width={180}
+          height={37}
+          priority
+        />
+      </Box>
       <h3>{subtitle}</h3>
     </Box>
   );

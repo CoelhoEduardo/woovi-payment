@@ -1,36 +1,38 @@
 "use client";
 
-import { v4 as uuidv4 } from "uuid";
-import { ButtonApp, Header } from "../components";
-import { Box, Container, Typography } from "@mui/material";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { ButtonApp, Header, PaymentInfo } from "../components";
+import { Alert, AlertTitle, Box, Collapse, Container } from "@mui/material";
 import Image from "next/image";
 import { FileCopy } from "@mui/icons-material";
+import CheckIcon from "@mui/icons-material/Check";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function PixPayment() {
-  const todayDate = new Date()
-    .toLocaleString("pt-BR", {
-      year: "numeric",
-      day: "numeric",
-      month: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    })
-    .replace(",", " - ");
-  const value = 30600;
-  const totalValue = value.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-  const valueToPay = (value / 2).toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-  const getUuid = uuidv4();
+  const [copy, setCopy] = useState(false);
+  const [counter, setCounter] = useState(5);
+  const router = useRouter();
 
+  const handleClick = () => {
+    setCopy(true);
+    const intervalId = setInterval(() => {
+      setCounter((prevCounter) => {
+        if (prevCounter <= 1) {
+          clearInterval(intervalId);
+          router.push("/payment-credit");
+          return 0;
+        }
+        return prevCounter - 1;
+      });
+    }, 1000);
+  };
   return (
     <Container maxWidth="sm">
-      <Header showingButton href="/" subtitle="João, pague a entrada de R$ 15.300,00 pelo Pix" />
+      <Header
+        showingButton
+        href="/"
+        subtitle="João, pague a entrada de R$ 15.300,00 pelo Pix"
+      />
       <Box p={2} display="flex" flexDirection="column" alignItems="center">
         <Box
           border={2}
@@ -51,170 +53,16 @@ export default function PixPayment() {
         </Box>
         <ButtonApp
           label="Clique para copiar QR CODE"
-          href="/payment-credit"
+          onClick={handleClick}
           icon={<FileCopy sx={{ width: "18px" }} />}
         />
-        <Box mt={2}>
-          <Box
-            fontSize={12}
-            mr={1}
-            sx={{ color: "#B2B2B2", fontSize: "10px" }}
-          >
-            Prazo de pagamento:
-          </Box>
-          <Box
-            fontSize={12}
-            mr={1}
-            sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
-          >
-            {todayDate}
-          </Box>
-        </Box>
-
-        <Box
-          mt={3}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-            width: "100%",
-          }}
-        >
-          <Box
-            position="relative"
-            sx={{ top: "42px", right: "18px" }}
-            width={20}
-          >
-            <Box
-              border={2}
-              position="absolute"
-              sx={{
-                bottom: "10px",
-                borderColor: "#03D69D",
-                borderRadius: "100%",
-                width: "10px",
-                height: "10px",
-              }}
-            />
-            <Box
-              border={1}
-              position="absolute"
-              sx={{
-                right: "2px",
-                borderColor: "#E5E5E5",
-                width: "20px",
-                transform: "rotate(90deg)",
-              }}
-            />
-            <Box
-              border={2}
-              position="absolute"
-              sx={{
-                top: "10px",
-                borderColor: "#E5E5E5",
-                borderRadius: "100%",
-                width: "10px",
-                height: "10px",
-              }}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Box
-              fontSize={12}
-              mr={1}
-              sx={{ color: "#4D4D4D", fontSize: "12px" }}
-            >
-              1ª entrada no Pix
-            </Box>
-            <Box
-              fontSize={12}
-              mr={1}
-              sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
-            >
-              {valueToPay}
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Box
-              fontSize={12}
-              mr={1}
-              sx={{ color: "#4D4D4D", fontSize: "12px" }}
-            >
-              2ª no cartão
-            </Box>
-            <Box
-              fontSize={12}
-              mr={1}
-              sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}
-            >
-              {valueToPay}
-            </Box>
-          </Box>
-        </Box>
-
-        <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
-        <Box
-          mt={3}
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
-            CET: 0,5%
-          </Box>
-          <Box sx={{ fontSize: "12px", color: "#4D4D4D" }}>
-            Total: {totalValue}
-          </Box>
-        </Box>
-        <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
-        <Box
-          mt={3}
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <Box
-            sx={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "bold" }}
-          >
-            Como funciona?
-          </Box>
-          <Box>
-            <ExpandLessIcon />
-          </Box>
-        </Box>
-        <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} mt={3} />
-        <Box mt={2} display="flex" flexDirection="column" alignItems="center">
-          <Box
-            fontSize={12}
-            mr={1}
-            sx={{ color: "#B2B2B2", fontSize: "10px" }}
-          >
-            Identificador:
-          </Box>
-          <Box
-            fontSize={12}
-            mr={1}
-            sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
-          >
-            {getUuid}
-          </Box>
-        </Box>
+        <Collapse in={copy}>
+          <Alert severity="success" icon={<CheckIcon fontSize="inherit" />}>
+            <AlertTitle>Qr Code copiado com suceso</AlertTitle>
+            Aguardando pagamento em {counter}
+          </Alert>
+        </Collapse>
+        <PaymentInfo hasPay={false} />
         <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
           <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}
           Pagamento 100% seguro via:{" "}

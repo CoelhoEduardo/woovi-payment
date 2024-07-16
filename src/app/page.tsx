@@ -7,8 +7,8 @@ import { useState, ChangeEvent } from "react";
 
 export default function Home() {
   const [selected, setSelected] = useState(2);
-
   const initialValue = 30500;
+  const percentPerInstallments = 0.165;
 
   function getTotalValue(
     initalValue: number,
@@ -22,13 +22,10 @@ export default function Home() {
     const totalValue = initalValue + valueIncrease;
     return Math.floor(totalValue);
   }
-  const percentPerInstallments = 0.165;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelected(+event.target.value);
   };
-
-  console.log(selected);
   return (
     <Container maxWidth="sm">
       <Header subtitle="João, como você quer pagar ?" />
