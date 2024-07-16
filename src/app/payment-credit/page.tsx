@@ -61,10 +61,10 @@ export default function PixPayment() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    setOpen(true);
     setFormData(initState);
   };
 
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <Container maxWidth="sm">
@@ -147,7 +147,7 @@ export default function PixPayment() {
               <MenuItem value={15300}>1x {valueToPay}</MenuItem>
             </Select>
           </FormControl>
-          <ButtonApp type="submit" label="Pagar" />
+          <ButtonApp type="submit" label="Pagar" onClick={handleOpen} />
         </Box>
         <Modal open={open} onClose={handleClose}>
           <Box sx={styleModal}>
@@ -160,7 +160,12 @@ export default function PixPayment() {
             />
             <Typography
               id="modal-modal-description"
-              sx={{ mt: 2, color: "#fff", fontWeight: "bold", fontSize: "14px" }}
+              sx={{
+                mt: 2,
+                color: "#fff",
+                fontWeight: "bold",
+                fontSize: "14px",
+              }}
             >
               Pagamento realizado com sucesso {formData.name.split(" ")[0]} 💙
             </Typography>
