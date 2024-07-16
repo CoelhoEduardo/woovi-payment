@@ -1,8 +1,7 @@
 "use client";
 
-import { ButtonApp, Card, Header } from "./components";
+import { ButtonApp, Card, Header, SafetyFooter } from "./components";
 import { Box, Container } from "@mui/material";
-import Image from "next/image";
 import { useState, ChangeEvent } from "react";
 
 export default function Home() {
@@ -65,11 +64,7 @@ export default function Home() {
           ))}
         </Box>
         <ButtonApp href="/payment-pix" label="Próximo" />
-        <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
-          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}
-          Pagamento 100% seguro via:{" "}
-          <Image alt="logo" width={38} height={12} src="/mini_logo.svg" />
-        </Box>
+        <SafetyFooter />
       </Box>
     </Container>
   );

@@ -1,7 +1,6 @@
 "use client";
 
-import { v4 as uuidv4 } from "uuid";
-import { ButtonApp, Header, PaymentInfo } from "../components";
+import { ButtonApp, Header, PaymentInfo, SafetyFooter } from "../components";
 import {
   Box,
   Container,
@@ -16,12 +15,12 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
-const style = {
+const styleModal = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 310,
   height: 100,
   bgcolor: "#03D69D",
   border: "3px solid #fff",
@@ -30,16 +29,43 @@ const style = {
   p: 4,
 };
 
+const styleForm = {
+  m: 1,
+  minWidth: 320,
+};
+
 export default function PixPayment() {
+  const initState = {
+    name: "João Linaldo dias Fraga Santos",
+    cpf: "405.503.503-15",
+    cardNumber: "405.503.503-15",
+    validate: "10/25",
+    cvv: "405",
+    installments: 15300,
+  };
+  const [formData, setFormData] = useState(initState);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const value = 30600;
   const valueToPay = (value / 2).toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
 
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    setOpen(true);
+    setFormData(initState);
+  };
+
+  const handleClose = () => setOpen(false);
   return (
     <Container maxWidth="sm">
       <Header
@@ -48,34 +74,83 @@ export default function PixPayment() {
         subtitle="João, pague o restante em 1x no cartão"
       />
       <Box p={2} display="flex" flexDirection="column" alignItems="center">
-        <Box component="form" display="grid" justifyItems="center">
-          <FormControl sx={{ m: 1, minWidth: 320 }}>
-            <TextField id="name" label="Nome completo" required />
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          display="grid"
+          justifyItems="center"
+        >
+          <FormControl sx={styleForm}>
+            <TextField
+              onChange={handleChange}
+              id="name"
+              name="name"
+              value={formData.name}
+              label="Nome completo"
+              required
+            />
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: 320 }}>
-            <TextField id="cpf" label="CPF" type="document" required />
+          <FormControl sx={styleForm}>
+            <TextField
+              id="cpf"
+              name="cpf"
+              onChange={handleChange}
+              value={formData.cpf}
+              label="CPF"
+              type="document"
+              required
+            />
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: 320 }}>
-            <TextField id="card-number" label="Número do cartão" required />
+          <FormControl sx={styleForm}>
+            <TextField
+              id="cardNumber"
+              name="cardNumber"
+              value={formData.cardNumber}
+              onChange={handleChange}
+              label="Número do cartão"
+              required
+            />
           </FormControl>
           <Box display="flex">
-            <FormControl sx={{ m: 1, width: 150}}>
-              <TextField id="maturity" label="Vencimento" required />
+            <FormControl sx={{ m: 1, width: 150 }}>
+              <TextField
+                id="validate"
+                name="validate"
+                onChange={handleChange}
+                value={formData.validate}
+                label="Vencimento"
+                required
+              />
             </FormControl>
             <FormControl sx={{ m: 1, width: 150 }}>
-              <TextField id="cvv" label="CVV" required />
+              <TextField
+                id="cvv"
+                label="CVV"
+                name="cvv"
+                value={formData.cvv}
+                onChange={handleChange}
+                required
+              />
             </FormControl>
           </Box>
-          <FormControl sx={{ m: 1, minWidth: 320 }}>
+          <FormControl sx={styleForm}>
             <InputLabel id="simple-select-label">Parcelas</InputLabel>
-            <Select required id="installments" label="Parcelas">
-              <MenuItem value={valueToPay}>1x {valueToPay}</MenuItem>
+            <Select
+              required
+              id="installments"
+              name="installments"
+              defaultValue={15300}
+              onChange={handleChange}
+              value={formData.installments}
+              label="Parcelas"
+            >
+              <MenuItem value={15300}>1x {valueToPay}</MenuItem>
             </Select>
           </FormControl>
-          <ButtonApp onClick={handleOpen} type="submit" label="Pagar" />
+          <ButtonApp type="submit" label="Pagar" />
         </Box>
         <Modal open={open} onClose={handleClose}>
-          <Box sx={style}>
+          <Box sx={styleModal}>
             <Image
               src="/logo_white.svg"
               alt="Woovi logo"
@@ -85,18 +160,14 @@ export default function PixPayment() {
             />
             <Typography
               id="modal-modal-description"
-              sx={{ mt: 2, color: "#fff", fontWeight: "bold" }}
+              sx={{ mt: 2, color: "#fff", fontWeight: "bold", fontSize: "14px" }}
             >
-              Pagamento realizado com sucesso
+              Pagamento realizado com sucesso {formData.name.split(" ")[0]} 💙
             </Typography>
           </Box>
         </Modal>
         <PaymentInfo hasPay />
-        <Box mt={3} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
-          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}
-          Pagamento 100% seguro via:{" "}
-          <Image alt="logo" width={38} height={12} src="/mini_logo.svg" />
-        </Box>
+        <SafetyFooter />
       </Box>
     </Container>
   );

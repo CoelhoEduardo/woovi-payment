@@ -1,6 +1,13 @@
+import React from "react";
 import { Box } from "@mui/material";
 
-export const Flag = ({ label, checked }: { label?: string, checked: boolean }) => {
+export const Flag = ({
+  label,
+  checked,
+}: {
+  label?: React.ReactNode;
+  checked: boolean;
+}) => {
   return (
     <Box
       position="relative"
@@ -8,13 +15,12 @@ export const Flag = ({ label, checked }: { label?: string, checked: boolean }) =
       sx={{
         backgroundColor: "#133A6F",
         top: "4px",
-        width: "230px",
+        width: "260px",
         borderRadius: "2px",
         height: "0px",
-        borderTop: "10px solid transparent",
-        borderBottom: "10px solid transparent",
-        borderRight: checked ? "10px solid #d5f4e670" : "10px solid white",
-        
+        borderTop: "12px solid transparent",
+        borderBottom: "12px solid transparent",
+        borderRight: checked ? "12px solid #d5f4e670" : "10px solid white",
       }}
     >
       <Box
@@ -22,7 +28,8 @@ export const Flag = ({ label, checked }: { label?: string, checked: boolean }) =
           color: "#FFF",
           marginLeft: "4px",
           alignSelf: "center",
-          fontSize: "9px",
+          fontSize: "11px",
+          fontWeight: '400'
         }}
       >
         {label}

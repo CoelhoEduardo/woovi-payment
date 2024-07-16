@@ -14,6 +14,7 @@ export const Header = ({
   return (
     <Box
       fontSize={15}
+      mt={3}
       gap={2}
       display="flex"
       flexDirection="column"
@@ -24,7 +25,7 @@ export const Header = ({
       <Box sx={{ position: "relative", width: "100%" }}>
         {showingButton === true ? (
           <Box sx={{ position: "absolute", bottom: "0px", left: "0px" }}>
-            <Button href={href} sx={{ color: "#133A6F" }}>
+            <Button href={href} sx={{ color: "#4D4D4D" }}>
               <ArrowBackIosIcon />
             </Button>
           </Box>

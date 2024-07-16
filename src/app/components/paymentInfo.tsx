@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckIcon from "@mui/icons-material/Check";
 
-export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
+export const PaymentInfo = ({ hasPay }: { hasPay: boolean }) => {
   const getUuid = uuidv4();
   const todayDate = new Date()
     .toLocaleString("pt-BR", {
@@ -33,14 +33,10 @@ export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Box mt={2}>
-        <Box fontSize={12} mr={1} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
+        <Box sx={{ color: "#B2B2B2", fontSize: "12px" }}>
           Prazo de pagamento:
         </Box>
-        <Box
-          fontSize={12}
-          mr={1}
-          sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
-        >
+        <Box sx={{ color: "#4D4D4D", fontSize: "12px", fontWeight: "bold" }}>
           {todayDate}
         </Box>
       </Box>
@@ -54,7 +50,7 @@ export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
           ml: "65px",
         }}
       >
-        <Box position="relative" sx={{ top: "42px", right: "18px" }} width={20}>
+        <Box position="relative" sx={{ top: "40px", right: "18px" }} width={20}>
           <Box
             border={2}
             position="absolute"
@@ -64,10 +60,11 @@ export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
               borderRadius: "100%",
               width: "10px",
               height: "10px",
-							background: hasPay ? "#03D69D" : 'none'
+              background: hasPay ? "#03D69D" : "none",
             }}
           />
-					{hasPay ? <CheckIcon
+          {hasPay ? (
+            <CheckIcon
               sx={{
                 position: "absolute",
                 color: "#FFF",
@@ -76,7 +73,8 @@ export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
                 height: "10px",
                 left: "2px",
               }}
-            /> : null}
+            />
+          ) : null}
           <Box
             border={1}
             position="absolute"
@@ -179,14 +177,8 @@ export const PaymentInfo = ({hasPay}:{hasPay: boolean}) => {
       </Box>
       <Box border={1} sx={{ borderColor: "#E5E5E5", width: "100%" }} />
       <Box mt={2} display="flex" flexDirection="column" alignItems="center">
-        <Box fontSize={12} mr={1} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
-          Identificador:
-        </Box>
-        <Box
-          fontSize={12}
-          mr={1}
-          sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}
-        >
+        <Box sx={{ color: "#B2B2B2", fontSize: "10px" }}>Identificador:</Box>
+        <Box sx={{ color: "#4D4D4D", fontSize: "10px", fontWeight: "bold" }}>
           <p suppressHydrationWarning>{getUuid}</p>
         </Box>
       </Box>

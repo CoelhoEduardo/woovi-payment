@@ -35,11 +35,19 @@ export const Card = ({
     installments === 1 ? (
       <Box>
         <Typography
-          sx={{ color: "#03D69D", fontSize: "10px", fontWeight: "bold" }}
+          sx={{ color: "#03D69D", fontSize: "12px", fontWeight: "300" }}
         >
-          Ganhe 3% de Cashback
+          Ganhe <span style={{ fontWeight: "bold" }}> 3% </span> de Cashback
         </Typography>
-        <Flag checked={checked} label="🤑 R$ 300,00 de volta no seu Pix na hora" />
+        <Flag
+          checked={checked}
+          label={
+            <>
+              🤑 <span style={{ fontWeight: "bold" }}>R$ 300 </span> de volta no
+              seu Pix na hora{" "}
+            </>
+          }
+        />
       </Box>
     ) : (
       `Total ${totalValue.toLocaleString("pt-br", {
@@ -50,7 +58,15 @@ export const Card = ({
 
   const flagLabel =
     installments === 4 ? (
-      <Flag checked={checked} label="-3% de juros: Melhor opção de parcelamento" />
+      <Flag
+        checked={checked}
+        label={
+          <>
+            <span style={{ fontWeight: "bold" }}>-3% de juros: </span>Melhor
+            opção de parcelamento
+          </>
+        }
+      />
     ) : null;
 
   const borderTopRadius =
@@ -59,7 +75,7 @@ export const Card = ({
     installments === 1 || installments === 7 ? "10px" : "0px";
 
   return (
-    <Box sx={{ width: "280px" }}>
+    <Box sx={{ width: "320px", minWidth: "250px" }}>
       <List
         sx={{
           width: "100%",
@@ -92,8 +108,12 @@ export const Card = ({
         <ListItem>
           <ListItemText
             primary={
-              <Typography display="flex" gap={1} sx={{ color: "#4D4D4D" }}>
-                <span style={{ fontWeight: "bold" }}>{installments}x</span>
+              <Typography
+                display="flex"
+                gap={1}
+                sx={{ color: "#4D4D4D", fontWeight: "500" }}
+              >
+                <span style={{ fontWeight: "800" }}>{installments}x</span>
                 {installmentsValue.toLocaleString("pt-br", {
                   style: "currency",
                   currency: "BRL",
@@ -103,7 +123,7 @@ export const Card = ({
             secondary={
               <Typography
                 component="div"
-                sx={{ fontSize: "10px", color: "#AFAFAF", fontWeight: "bold" }}
+                sx={{ fontSize: "12px", color: "#AFAFAF", fontWeight: "bold" }}
               >
                 {labelTotal}
                 {flagLabel}
@@ -112,7 +132,7 @@ export const Card = ({
           />
         </ListItem>
         <ListItem
-          sx={{ position: "absolute", top: "10px", right: "0px" }}
+          sx={{ position: "absolute", top: "15px", right: "0px" }}
           secondaryAction={
             <Radio
               onFocus={onFocus}

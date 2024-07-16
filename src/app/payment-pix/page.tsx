@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonApp, Header, PaymentInfo } from "../components";
+import { ButtonApp, Header, PaymentInfo, SafetyFooter } from "../components";
 import { Alert, AlertTitle, Box, Collapse, Container } from "@mui/material";
 import Image from "next/image";
 import { FileCopy } from "@mui/icons-material";
@@ -63,11 +63,7 @@ export default function PixPayment() {
           </Alert>
         </Collapse>
         <PaymentInfo hasPay={false} />
-        <Box mt={5} sx={{ color: "#B2B2B2", fontSize: "10px" }}>
-          <Image alt="safe icon" width={15} height={15} src="/safe_icon.svg" />{" "}
-          Pagamento 100% seguro via:{" "}
-          <Image alt="logo" width={38} height={12} src="/mini_logo.svg" />
-        </Box>
+        <SafetyFooter />
       </Box>
     </Container>
   );
